@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Phone implements Serializable {
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "InfoEntity")
+    @JoinColumn()
     private InfoEntity infoEntity;
     
     private static final long serialVersionUID = 1L;

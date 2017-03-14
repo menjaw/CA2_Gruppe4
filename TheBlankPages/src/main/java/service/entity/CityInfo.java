@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 public class CityInfo implements Serializable {
 
     @OneToMany(mappedBy = "cityInfo")
-    @JoinColumn(name = "id", referencedColumnName = "Address")
+    @JoinColumn()
     private List<Address> addresses;
 
     private static final long serialVersionUID = 1L;

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -15,6 +17,7 @@ import javax.persistence.OneToMany;
  * @author Group 4
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,10 +26,10 @@ public class InfoEntity implements Serializable {
     private Integer id;
     private String email;
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "Address")
+    @JoinColumn()
     private Address address;
     @OneToMany(mappedBy = "infoEntity")
-    @JoinColumn(name = "id", referencedColumnName = "Phone")
+    @JoinColumn()
     private List<Phone> phones;
 
     public InfoEntity() {

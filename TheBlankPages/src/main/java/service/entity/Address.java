@@ -18,11 +18,11 @@ import javax.persistence.OneToMany;
 public class Address implements Serializable {
     
     @OneToMany(mappedBy = "address")
-    @JoinColumn(name = "id", referencedColumnName = "InfoEntity")
+    @JoinColumn()
     private List<InfoEntity> infoEntities;
     
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "CityInfo")
+    @JoinColumn()
     private CityInfo cityInfo;
 
     private static final long serialVersionUID = 1L;
