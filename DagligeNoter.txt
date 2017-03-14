@@ -1,0 +1,22 @@
+Mandag:
+- Bruger Hannibals Digital Ocean
+- Benytter Menjas GitHub (Er lavet)
+- Opbyg dokumentations-web-project 
+
+FØLG OP PÅ FØLGENDE:
+Tirsdag:
+- Remember to fix gitIgnore:
+- Test: Specific test database for the JUnit-part 
+(See exercise for hints, how to have two persistence unit and an in-memory test database)
+- 
+
+
+
+
+NOTER:
+Relations: 
+- Owning side: One-to-many og one-to-one: Foreign key som afgør ownership
+- Owning side: Many-to-many: Der findes ikke en owner
+
+- Hvis persistence.xml er med i Git Status så checkout file
+- Det kan være nødvendigt at slette persistence filen og oprette en ny
