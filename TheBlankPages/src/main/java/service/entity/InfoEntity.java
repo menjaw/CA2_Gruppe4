@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -22,8 +23,10 @@ public class InfoEntity implements Serializable {
     private Integer id;
     private String email;
     @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "Address")
     private Address address;
     @OneToMany(mappedBy = "infoEntity")
+    @JoinColumn(name = "id", referencedColumnName = "Phone")
     private List<Phone> phones;
 
     public InfoEntity() {
