@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * @author Group 4
  */
 @Entity
-public class Company implements Serializable {
+public class Company extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,7 +33,8 @@ public class Company implements Serializable {
         this.numberOfEmployees = numberOfEmployees;
         this.marketValue = marketValue;
     }
-    
+
+    @Override
     public Integer getId() {
         return id;
     }
