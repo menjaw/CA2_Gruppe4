@@ -43,9 +43,9 @@ public class DataGenerator {
         int count = 0;
         nameOfTable = "hobby";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
-            Hobby dataElement = new Hobby(count+1, "hobbyName"+(count+1), "hobbyDescription"+(count+1));
+            Hobby dataElement = new Hobby("hobbyName"+(count+1), "hobbyDescription"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (id, `name`, description) values ("+dataElement.getId()+", \""+dataElement.getName()+"\", \""+dataElement.getDescription()+"\");";
+            String result = "insert into "+nameOfTable+" (`name`, description) values ("+"\""+dataElement.getName()+"\", \""+dataElement.getDescription()+"\");";
             data.writeToFile(result);
             count++;
         }
@@ -79,7 +79,7 @@ public class DataGenerator {
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             InfoEntity dataElement = new InfoEntity((count+1)+"@email.com");
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (dtype, email, address_id) values (\"dtype\", \""+dataElement.getEmail()+"\", "+(count+1)+");";
+            String result = "insert into "+nameOfTable+" (dtype, email, address_id) values (\"Person\", \""+dataElement.getEmail()+"\", "+(count+1)+");";
             data.writeToFile(result);
             count++;
         }
@@ -96,7 +96,7 @@ public class DataGenerator {
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Person dataElement = new Person("fn"+(count+1),"ln"+(count+1),"em"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (firstname, lastname, email) values (\""+dataElement.getFirstname()+"\", \""+dataElement.getLastname()+"\", \""+dataElement.getEmail()+"\");";
+            String result = "insert into "+nameOfTable+" (firstname, lastname) values (\""+dataElement.getFirstname()+"\", \""+dataElement.getLastname()+"\");";
             data.writeToFile(result);
             count++;
         }

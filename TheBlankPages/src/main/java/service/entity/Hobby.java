@@ -1,7 +1,9 @@
 package service.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,19 +23,13 @@ public class Hobby implements Serializable {
     private Integer id;
     private String name;
     private String description;
-    @ManyToMany(mappedBy = "hobbies")
-    private List<Person> persons;
+    @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.PERSIST)
+    private List<Person> persons = new ArrayList();
 
     public Hobby() {
     }
 
     public Hobby(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public Hobby(Integer id, String name, String description) {
-        this.id = id;
         this.name = name;
         this.description = description;
     }
@@ -58,6 +54,14 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+    
     @Override
     public String toString() {
         return "Hobby{" + "id=" + id + ", name=" + name + ", description=" + description + '}';

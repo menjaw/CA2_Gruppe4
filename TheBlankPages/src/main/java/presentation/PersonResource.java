@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import service.entity.Person;
 import service.logic.Facade;
@@ -51,7 +52,38 @@ public class PersonResource {
         return jsonPersons;
        //return ""; 
     }
+    @GET
+    @Path("/byid/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+//    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersons(@PathParam("id") int id) {
+        Person p = facade.getPerson(id);
+        //String jsonPersons = service.logic.JSONConverter.getJSONFromPerson(p);//convert list to JSON
+        //String s = gson.toJson(p);
+        return p.toString();
+       //return ""; 
+    }
+    
+    @GET
+    @Path("/{firstname}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersons(@PathParam("firstname") String firstname) {
+        List<Person> persons = facade.getPersons(firstname);
+        //System.out.println(persons.size());
+        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
+        //System.out.println(jsonPersons[0]);
+       // System.out.println(gson.fromJson(jsonPersons.toString()));
+        //System.out.println(jsonPersons);
+        return jsonPersons;
+       //return ""; 
+    }
 
+    
+    
+    
+    
+    
+    
     /**
      * PUT method for updating or creating an instance of PersonResource
      *

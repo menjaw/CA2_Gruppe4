@@ -3,6 +3,7 @@ package service.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,13 +18,13 @@ import javax.persistence.Table;
  * @author Group 4
  */
 @Entity
-@Table(name = "person")
-@NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
-    })
+//@Table(name = "person")
+//@NamedQueries({
+//    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+//    })
 public class Person extends InfoEntity implements Serializable {
-    @ManyToMany
-    private List<Hobby> hobbies;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Hobby> hobbies = new ArrayList();
     
     private static final long serialVersionUID = 1L;
     private String firstname;
@@ -37,11 +38,10 @@ public class Person extends InfoEntity implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-
-//    @Override
-//    public Integer getId() {
-//        return id;
-//    }
+    
+    public void addHobby(Hobby hobby){
+        this.hobbies.add(hobby);
+    }
 
     public String getFirstname() {
         return firstname;
@@ -59,8 +59,18 @@ public class Person extends InfoEntity implements Serializable {
         this.lastname = lastname;
     }
 
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobbies = hobbies;
+    }
+
     @Override
     public String toString() {
-        return "Person{" + ", firstname=" + firstname + ", lastname=" + lastname + '}';
+        return "Person{" + "firstname=" + firstname + ", lastname=" + lastname + '}';
     }
+    
+   
 }

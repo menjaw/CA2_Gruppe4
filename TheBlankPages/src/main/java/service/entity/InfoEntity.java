@@ -1,7 +1,9 @@
 package service.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+//@DiscriminatorColumn
 public class InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,17 +30,21 @@ public class InfoEntity implements Serializable {
     private Integer id;
     private String email;
     @ManyToOne
-    @JoinColumn()
+    //@JoinColumn()
     private Address address;
-    @OneToMany(mappedBy = "infoEntity")
-    @JoinColumn()
-    private List<Phone> phones;
+    @OneToMany(mappedBy = "infoEntity", cascade = CascadeType.ALL)
+    @JoinColumn(name = "IE_ID")
+    private List<Phone> phones = new ArrayList();
 
     public InfoEntity() {
     }
 
     public InfoEntity(String email) {
         this.email = email;
+    }
+    
+    public void addPhone(Phone phone) {
+        this.phones.add(phone);
     }
     
     public Integer getId() {
@@ -52,7 +58,15 @@ public class InfoEntity implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public List<Phone> getPhones() {
+        return phones;
+    }
 
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+    
     @Override
     public String toString() {
         return "InfoEntity{" + "id=" + id + ", email=" + email + '}';

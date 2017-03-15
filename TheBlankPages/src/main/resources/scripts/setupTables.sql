@@ -91,8 +91,8 @@ CREATE TABLE IF NOT EXISTS `ca2`.`person` (
   `ID` INT(11) NOT NULL,
   `FIRSTNAME` VARCHAR(255) NULL DEFAULT NULL,
   `LASTNAME` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`FIRSTNAME`),
-  CONSTRAINT `FK_person_ID`
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `FK_PERSON_ID`
     FOREIGN KEY (`ID`)
     REFERENCES `ca2`.`infoentity` (`ID`))
 ENGINE = InnoDB
@@ -106,11 +106,11 @@ CREATE TABLE IF NOT EXISTS `ca2`.`person_hobby` (
   `hobbies_ID` INT(11) NOT NULL,
   `persons_ID` INT(11) NOT NULL,
   PRIMARY KEY (`hobbies_ID`, `persons_ID`),
-  INDEX `FK_person_HOBBY_persons_ID` (`persons_ID` ASC),
-  CONSTRAINT `FK_person_HOBBY_hobbies_ID`
+  INDEX `FK_PERSON_HOBBY_persons_ID` (`persons_ID` ASC),
+  CONSTRAINT `FK_PERSON_HOBBY_hobbies_ID`
     FOREIGN KEY (`hobbies_ID`)
     REFERENCES `ca2`.`hobby` (`ID`),
-  CONSTRAINT `FK_person_HOBBY_persons_ID`
+  CONSTRAINT `FK_PERSON_HOBBY_persons_ID`
     FOREIGN KEY (`persons_ID`)
     REFERENCES `ca2`.`infoentity` (`ID`))
 ENGINE = InnoDB

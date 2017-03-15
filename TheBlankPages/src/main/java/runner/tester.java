@@ -11,7 +11,7 @@ import service.entity.Person;
 
 /**
  *
- * @author Martin
+ * @author Group 4
  */
 public class tester {
     public static void main(String[] args) {

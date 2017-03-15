@@ -32,12 +32,6 @@ public class Phone implements Serializable {
         this.phone = phone;
         this.description = description;
     }
-    
-    public Phone(int id, int phone, String description) {
-        this.id = id;
-        this.phone = phone;
-        this.description = description;
-    }
 
     public Integer getId() {
         return id;
