@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rest JAX IS</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <p><b>Get person</b></p>
+        </div>
+        <button id="btnGetRandomPerson">Get random person</button>
+        <form action="JavaScript:getSpecifiedPerson()">
+            <input type="text" id="inputGetSpecifiedPerson">
+            <input type="submit" id="btnGetSpecifiedPerson" value="Get specified person">
+        </form>
+        <form id="formAddPerson" action="JavaScript:addNewPerson()" method="POST" style="display:none">
+            <p><b>Add new person</b></p>
+            <input type="text" id="fname" placeholder="First name">
+            <input type="text" id="lname" placeholder="Last name">
+            <input type="text" id="phone" placeholder="Telephone number">
+            <input type="submit" id="btnAddNewPerson" value="Add new person">
+        </form>
+        <button id="btnReloadData">Reload data</button>
+        <button id="btnAddPerson">Add person</button>
+        <table id="outputTable" class="table"></table>
+        
+        <script src="js.js"></script>
+    </body>
+</html>

@@ -14,9 +14,6 @@ import javax.persistence.Id;
 public class Company extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String name;
     private String description;
     private int cvr;
@@ -26,7 +23,8 @@ public class Company extends InfoEntity implements Serializable {
     public Company() {
     }
 
-    public Company(String name, String description, int cvr, int numberOfEmployees, double marketValue) {
+    public Company(String name, String description, int cvr, int numberOfEmployees, double marketValue, String email) {
+        super(email);
         this.name = name;
         this.description = description;
         this.cvr = cvr;
@@ -34,10 +32,7 @@ public class Company extends InfoEntity implements Serializable {
         this.marketValue = marketValue;
     }
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
+
 
     public String getName() {
         return name;
@@ -81,6 +76,6 @@ public class Company extends InfoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Company{" + "id=" + id + ", name=" + name + ", description=" + description + ", cvr=" + cvr + ", numberOfEmployees=" + numberOfEmployees + ", marketValue=" + marketValue + '}';
+        return "Company{"+"name=" + name + ", description=" + description + ", cvr=" + cvr + ", numberOfEmployees=" + numberOfEmployees + ", marketValue=" + marketValue + '}';
     }
 }

@@ -10,8 +10,8 @@ import javax.persistence.Persistence;
  */
 public class SchemaBuilder {
     public static void main(String[] args) {
-      EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
-        EntityManager em = emf.createEntityManager();
+//      EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+//        EntityManager em = emf.createEntityManager();
 //        Persistence.generateSchema("pu", null);
         
         Persistence.generateSchema("pu", null);

@@ -94,9 +94,9 @@ public class DataGenerator {
         int count = 0;
         nameOfTable = "person";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
-            Person dataElement = new Person(count+1,"fn"+(count+1),"ln"+(count+1));
+            Person dataElement = new Person("fn"+(count+1),"ln"+(count+1),"em"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (id, firstname, lastname) values ("+dataElement.getId()+", \""+dataElement.getFirstname()+"\", \""+dataElement.getLastname()+"\");";
+            String result = "insert into "+nameOfTable+" (firstname, lastname, email) values (\""+dataElement.getFirstname()+"\", \""+dataElement.getLastname()+"\", \""+dataElement.getEmail()+"\");";
             data.writeToFile(result);
             count++;
         }

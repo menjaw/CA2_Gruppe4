@@ -8,41 +8,40 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author Group 4
  */
 @Entity
+@Table(name = "person")
+@NamedQueries({
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+    })
 public class Person extends InfoEntity implements Serializable {
     @ManyToMany
     private List<Hobby> hobbies;
     
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private String firstname;
     private String lastname;
-
+    
     public Person() {
     }
 
-    public Person(String firstname, String lastname) {
+    public Person(String firstname, String lastname, String email) {
+        super(email);
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    public Person(Integer id, String firstname, String lastname) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
+//    @Override
+//    public Integer getId() {
+//        return id;
+//    }
 
     public String getFirstname() {
         return firstname;
@@ -62,6 +61,6 @@ public class Person extends InfoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + '}';
+        return "Person{" + ", firstname=" + firstname + ", lastname=" + lastname + '}';
     }
 }

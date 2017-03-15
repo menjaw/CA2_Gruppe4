@@ -1,5 +1,8 @@
 package presentation;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import static com.jayway.restassured.parsing.Parser.JSON;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -19,7 +22,8 @@ import service.logic.Facade;
  */
 @Path("person")
 public class PersonResource {
-Facade facade = new Facade();
+    Facade facade = new Facade();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
     @Context
     private UriInfo context;
 
@@ -35,12 +39,17 @@ Facade facade = new Facade();
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersons() {
-       List<Person> persons = facade.getPersons();
-        
-       
-       return ""; 
+        List<Person> persons = facade.getPersons();
+        //System.out.println(persons.size());
+        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
+        //System.out.println(jsonPersons[0]);
+       // System.out.println(gson.fromJson(jsonPersons.toString()));
+        //System.out.println(jsonPersons);
+        return jsonPersons;
+       //return ""; 
     }
 
     /**
