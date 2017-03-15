@@ -32,7 +32,13 @@ public class Person extends InfoEntity implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-    
+
+    public Person(Integer id, String firstname, String lastname) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     @Override
     public Integer getId() {
         return id;

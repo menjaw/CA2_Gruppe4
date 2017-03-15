@@ -22,13 +22,19 @@ public class Phone implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    String phone;
+    int phone;
     String description;
 
     public Phone() {
     }
 
-    public Phone(String phone, String description) {
+    public Phone(int phone, String description) {
+        this.phone = phone;
+        this.description = description;
+    }
+    
+    public Phone(int id, int phone, String description) {
+        this.id = id;
         this.phone = phone;
         this.description = description;
     }
@@ -37,11 +43,11 @@ public class Phone implements Serializable {
         return id;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
