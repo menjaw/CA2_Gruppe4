@@ -23,9 +23,9 @@ public class Facade implements FacadeInterface {
         // add two persons to the list
         //test to ensure you get the list
         List<Person> persons = new ArrayList();
-        
-        persons.add( new Person("hannibal", "Skriver"));
-        persons.add( new Person("martin", "kirk"));
+       // persons.add();
+//        persons.add( new Person("hannibal", "Skriver"));
+//        persons.add( new Person("martin", "kirk"));
         
         return persons;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
