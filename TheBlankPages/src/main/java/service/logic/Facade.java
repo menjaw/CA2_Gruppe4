@@ -74,6 +74,7 @@ public class Facade implements FacadeInterface {
         personToModify.setFirstName(personWithUpdatedDetails.getFirstName());
         personToModify.setLastName(personWithUpdatedDetails.getLastName());
         mergeData(personToModify, em);
+        em = emf.createEntityManager();
         Person personModified = em.find(Person.class,personToModify.getId());
         return personModified;
         

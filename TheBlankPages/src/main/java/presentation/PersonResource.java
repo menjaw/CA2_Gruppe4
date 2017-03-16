@@ -58,14 +58,32 @@ public class PersonResource {
         return jsonconverter.getJSONFromPerson(personAdded);
     }
     
-    @PUT
+    @POST
+    @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String putJson(String jsonPerson) {
-        Person personToModify = jsonconverter.getPersonFromJson(jsonPerson);
+    public String updatePerson(String inputtedPerson) {
+        
+        Person personToModify = jsonconverter.getPersonFromJson(inputtedPerson);
         Person personModified = facade.updatePerson(personToModify);
         return jsonconverter.getJSONFromPerson(personModified);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     @DELETE
     @Path("/delete/{id}")
