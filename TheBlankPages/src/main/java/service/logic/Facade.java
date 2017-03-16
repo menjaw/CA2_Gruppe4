@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import service.entity.Company;
 import service.entity.InfoEntity;
 import service.entity.Person;
@@ -45,6 +46,64 @@ public class Facade implements FacadeInterface {
         return p;
     }
     
+//    @Override
+//    public Person updatePerson(Person p) {
+//        em = emf.createEntityManager();
+//        TypedQuery<Person> result = em.createNamedQuery("Person.findById", Person.class);
+//        Person personToUpdate = result.setParameter("id", p.getId()).getSingleResult();
+//
+//        //Udfør ændringerne i databasen
+//        em.getTransaction().begin();
+//        //Tag fat i personToUpdate-variablen og set de forskellige værdier
+//        personToUpdate.setFirstName(p.getFirstName());
+//        personToUpdate.setLastName(p.getLastName());
+//        personToUpdate.setPhones(2,1234);
+////                
+////                (p.getPhones().get(0));
+//        em.getTransaction().commit();
+//        em.close();
+//
+//        //Returner den opdateret person
+//        return personToUpdate;
+//    }
+        
+    @Override
+    public Person updatePerson(Person personWithUpdatedDetails) {
+        em = emf.createEntityManager();
+        Person personToModify = em.find(Person.class,personWithUpdatedDetails.getId());
+        personToModify.setFirstName(personWithUpdatedDetails.getFirstName());
+        personToModify.setLastName(personWithUpdatedDetails.getLastName());
+        mergeData(personToModify, em);
+        Person personModified = em.find(Person.class,personToModify.getId());
+        return personModified;
+        
+        
+//        TypedQuery<Person> result = em.createNamedQuery("Person.findById", Person.class);
+//        Person personToUpdate = result.setParameter("id", p.getId()).getSingleResult();
+
+        //Udfør ændringerne i databasen
+//        em.getTransaction().begin();
+        //Tag fat i personToUpdate-variablen og set de forskellige værdier
+//        personToUpdate.setFirstName(p.getFirstName());
+//        personToUpdate.setLastName(p.getLastName());
+//        personToUpdate.setPhones(2,1234);
+//                
+//                (p.getPhones().get(0));
+//        em.getTransaction().commit();
+//        em.close();
+
+        //Returner den opdateret person
+    }    
+        
+    
+    
+    @Override
+    public Person deletePerson(int id) {
+        em = emf.createEntityManager();
+        Person personToDelete = em.find(Person.class, id);
+        deleteData(personToDelete, em);
+        return personToDelete;
+    }
     
     
     
@@ -54,6 +113,21 @@ public class Facade implements FacadeInterface {
         try{
             em.getTransaction().begin();
             em.persist(o);
+            em.getTransaction().commit();
+        }
+        catch(Exception e){
+            return false;
+        }
+        finally{
+            em.close();
+        }
+        return true;
+    }
+    
+    private boolean mergeData(Object o, EntityManager em){
+        try{
+            em.getTransaction().begin();
+            em.merge(o);
             em.getTransaction().commit();
         }
         catch(Exception e){

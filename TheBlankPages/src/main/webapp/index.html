@@ -3,12 +3,13 @@
     <head>
         <title>The Blank Pages</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
         <h1>Hello Blanko!</h1>
         <div>
-            <form id="formAddPerson" action="JavaScript:createPerson()" method="POST">
-                <p><b>Add new person</b></p>
+            <form id="formPerson" action="JavaScript:addOrUpdate()" method="POST" style="display:none">
+                <div id="toggletext"><b>Add new person</b></div>
                 <input type="text" id="fname" placeholder="First name">
                 <input type="text" id="lname" placeholder="Last name">
                 <input type="text" id="email" placeholder="E-mail address">
@@ -18,10 +19,16 @@
                 <input type="text" id="additionalInfo" placeholder="Additional info, e.g. 'first floor'">
                 <input type="text" id="zipCode" placeholder="Zip code">
                 <input type="text" id="city" placeholder="City">
-                <input type="submit" id="btnAddNewPerson" value="Add new person">
+                <input type="submit" id="btnAddNewPerson" value="Submit">
+                <input type="hidden" id="toggle" value="">
             </form>
+            <button id="addPerson">Add Person</button>
+            <button id="updatePerson">Update Person</button>
         </div>
         <div id="output"></div>
+        <table class="table table-striped" id="outputTable"></table>
         <script src="js.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>

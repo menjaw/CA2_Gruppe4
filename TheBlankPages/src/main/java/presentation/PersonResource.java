@@ -6,6 +6,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import service.entity.Person;
 import service.logic.Facade;
+import service.logic.JSONConverter;
 
 /**
  * REST Web Service
@@ -23,6 +25,7 @@ import service.logic.Facade;
 @Path("person")
 public class PersonResource {
     Facade facade;
+    JSONConverter jsonconverter = new JSONConverter();
     @Context
     private UriInfo context;
 
@@ -35,7 +38,7 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getPerson(@PathParam("id") int id) {
         Person p = facade.getPerson(id);
-        return service.logic.JSONConverter.getJSONFromPerson(p);
+        return jsonconverter.getJSONFromPerson(p);
     }
     
     @GET
@@ -43,20 +46,35 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersons() {
         List<Person> ps = facade.getPersons();
-        return service.logic.JSONConverter.getJSONFromPersons(ps);
+        return jsonconverter.getJSONFromPersons(ps);
     }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String addPerson(String inputtedPerson) {
-        Person personToAdd = service.logic.JSONConverter.getPersonFromJson(inputtedPerson);//convert Person object from JSON to Java
+        Person personToAdd = jsonconverter.getPersonFromJson(inputtedPerson);//convert Person object from JSON to Java
         Person personAdded = facade.addPerson(personToAdd);
-        return service.logic.JSONConverter.getJSONFromPerson(personAdded);
+        return jsonconverter.getJSONFromPerson(personAdded);
     }
     
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String putJson(String jsonPerson) {
+        Person personToModify = jsonconverter.getPersonFromJson(jsonPerson);
+        Person personModified = facade.updatePerson(personToModify);
+        return jsonconverter.getJSONFromPerson(personModified);
+    }
     
-    
+    @DELETE
+    @Path("/delete/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteText(@PathParam("id") int id) {
+        Person deletedPerson = facade.deletePerson(id);
+        return jsonconverter.getJSONFromPerson(deletedPerson);
+    }
     
     
     
@@ -106,13 +124,5 @@ public class PersonResource {
     
     
     
-    /**
-     * PUT method for updating or creating an instance of PersonResource
-     *
-     * @param content representation for the resource
-     */
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void putJson(String content) {
-//    }
+    
 }
