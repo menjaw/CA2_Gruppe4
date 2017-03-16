@@ -52,6 +52,10 @@ and open the template in the editor.
     font-size: 30px;
 }
 
+img{
+    margin: 15px;
+}
+
 .margin0px{
     margin: 0;
 }
@@ -67,4 +71,22 @@ and open the template in the editor.
 .margin15px{
     margin: 15px;
 }
+
+.marginBottom5px{
+    margin-bottom: 5px;
+}
+.marginBottom15px{
+    margin-bottom: 15px;
+}
+.marginBottom20px{
+    margin-bottom: 20px;
+}
+.marginBottom25px{
+    margin-bottom: 25px;
+}
+
+.marginTop25px{
+    margin-top: 25px;
+}
+
 

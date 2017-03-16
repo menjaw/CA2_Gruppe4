@@ -4,14 +4,14 @@ Mandag:
 - Opbyg dokumentations-web-project 
 
 FØLG OP PÅ FØLGENDE:
-Tirsdag:
 - Remember to fix gitIgnore:
 - Test: Specific test database for the JUnit-part 
 (See exercise for hints, how to have two persistence unit and an in-memory test database)
-- 
+- Fix id on person and company classes (should be inherintance from infoEntity), både person og company skal have tilføjet en Super
+- Ændre author i documentation
 
 
-
+Tirsdag:
 OBS!
 Some Java Persistence API providers, including the default provider in the GlassFish Server, 
 require a discriminator column that corresponds to the root entity when using the joined subclass strategy. 
@@ -20,8 +20,6 @@ up correctly for the discriminator column defaults, or use the @DiscriminatorCol
 database schema. For information on discriminator columns, see The Single Table per Class Hierarchy 
 Strategy.
 
-
-
 NOTER:
 Relations: 
 - Owning side: One-to-many og one-to-one: Foreign key som afgør ownership
@@ -29,3 +27,6 @@ Relations:
 
 - Hvis persistence.xml er med i Git Status så checkout file
 - Det kan være nødvendigt at slette persistence filen og oprette en ny
+
+Onsdag:
+
