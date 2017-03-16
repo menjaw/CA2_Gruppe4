@@ -47,7 +47,7 @@ function createPerson(){
             lastName: lname.value,
             email: email.value,
             phones: [{number:phone.value,description:phoneDesc.value}],
-            address: {street:street.value, additionalInfo:additionalInfo.value, cityInfo:1}
+            address: {street:street.value, additionalInfo:additionalInfo.value, cityInfo:{zipCode: 1}}
         })
     };
     
