@@ -28,7 +28,7 @@ public class Facade implements FacadeInterface {
     @Override
     public Person getPerson(int id) {
         em = emf.createEntityManager();
-        Person p = em.find(Person.class,1);
+        Person p = em.find(Person.class,id);
         return p;
     }
     

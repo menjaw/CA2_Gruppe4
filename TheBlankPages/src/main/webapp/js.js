@@ -16,7 +16,12 @@ function getPersonCompleteId(id){
         promise.then(function(response){
             return response.text();
         }).then(function(text){
-            document.getElementById("output").innerHTML = text;
+            if(data.quote!==null){
+                document.getElementById("output").innerHTML = text;
+            }
+            if(data.quote!=null){
+                alert("abc");
+            }
         });
 }
 
