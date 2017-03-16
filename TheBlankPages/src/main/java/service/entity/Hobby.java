@@ -1,19 +1,11 @@
 package service.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-/**
- *
- * @author Group 4
- */
+
 @Entity
 public class Hobby implements Serializable {
 
@@ -21,11 +13,13 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String description;
+    private String name, description;
+    
+    
     @ManyToMany(mappedBy = "hobbies", cascade = CascadeType.PERSIST)
-    private List<Person> persons = new ArrayList();
+    private transient List<Person> persons = new ArrayList<>();
 
+    
     public Hobby() {
     }
 
@@ -33,9 +27,13 @@ public class Hobby implements Serializable {
         this.name = name;
         this.description = description;
     }
-    
+
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,10 +59,7 @@ public class Hobby implements Serializable {
     public void setPersons(List<Person> persons) {
         this.persons = persons;
     }
-    
-    @Override
-    public String toString() {
-        return "Hobby{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
-    }
 
+    
+    
 }

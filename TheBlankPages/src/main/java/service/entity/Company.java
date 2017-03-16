@@ -1,38 +1,30 @@
 package service.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-/**
- *
- * @author Group 4
- */
 @Entity
 public class Company extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String name;
-    private String description;
-    private int cvr;
-    private int numberOfEmployees;
+
+    private String name, description;
+    private int NumEmployees, cvr;
     private double marketValue;
 
     public Company() {
     }
 
-    public Company(String name, String description, int cvr, int numberOfEmployees, double marketValue, String email) {
+    public Company(String name, String description, int NumEmployees, int cvr, double marketValue, String email) {
         super(email);
         this.name = name;
         this.description = description;
+        this.NumEmployees = NumEmployees;
         this.cvr = cvr;
-        this.numberOfEmployees = numberOfEmployees;
         this.marketValue = marketValue;
     }
-
-
 
     public String getName() {
         return name;
@@ -50,20 +42,20 @@ public class Company extends InfoEntity implements Serializable {
         this.description = description;
     }
 
+    public int getNumEmployees() {
+        return NumEmployees;
+    }
+
+    public void setNumEmployees(int NumEmployees) {
+        this.NumEmployees = NumEmployees;
+    }
+
     public int getCvr() {
         return cvr;
     }
 
     public void setCvr(int cvr) {
         this.cvr = cvr;
-    }
-
-    public int getNumberOfEmployees() {
-        return numberOfEmployees;
-    }
-
-    public void setNumberOfEmployees(int numberOfEmployees) {
-        this.numberOfEmployees = numberOfEmployees;
     }
 
     public double getMarketValue() {
@@ -76,6 +68,9 @@ public class Company extends InfoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Company{"+"name=" + name + ", description=" + description + ", cvr=" + cvr + ", numberOfEmployees=" + numberOfEmployees + ", marketValue=" + marketValue + '}';
+        return "Company{" + "name=" + name + ", description=" + description + ", NumEmployees=" + NumEmployees + ", cvr=" + cvr + ", marketValue=" + marketValue + '}';
     }
+    
+    
+
 }

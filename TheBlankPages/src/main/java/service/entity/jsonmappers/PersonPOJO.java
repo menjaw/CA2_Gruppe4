@@ -1,5 +1,6 @@
-package service.entity;
+package service.entity.jsonmappers;
 
+import service.entity.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -10,7 +11,7 @@ import javax.persistence.FetchType;
 
 
 @Entity
-public class Person extends InfoEntity implements Serializable {
+public class PersonPOJO extends InfoEntity implements Serializable {
 
 //    /private static final long serialVersionUID = 1L;
  
@@ -20,44 +21,25 @@ public class Person extends InfoEntity implements Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Hobby> hobbies = new ArrayList<>();
     
-    public Person() {
+    public PersonPOJO() {
     }
 
-    public Person(String firstName, String lastName, String email) {
+    public PersonPOJO(String firstName, String lastName, String email) {
         super(email);
         this.firstName = firstName;
         this.lastName = lastName;
     }
     
-    public void addHobby(Hobby hobby){
-        
-        this.hobbies.add(hobby);
-        
-    }
-    
-    
     public List<Hobby> getHobbies() {
         return hobbies;
-    }
-
-    public void setHobbies(List<Hobby> hobbies) {
-        this.hobbies = hobbies;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     @Override

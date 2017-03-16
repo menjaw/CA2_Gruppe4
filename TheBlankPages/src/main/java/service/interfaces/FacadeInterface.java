@@ -13,4 +13,5 @@ public interface FacadeInterface {
     List<Person> getPersons();
     List<Person> getPersons(int zipCode);
     Company getCompany(int cvr);
+    Person addPerson(Person p);
 }

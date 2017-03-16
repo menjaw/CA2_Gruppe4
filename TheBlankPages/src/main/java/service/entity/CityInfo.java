@@ -1,32 +1,21 @@
 package service.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
-/**
- *
- * @author Group 4
- */
+
+
 @Entity
 public class CityInfo implements Serializable {
 
-    @OneToMany(mappedBy = "cityInfo")
-    @JoinColumn()
-    private List<Address> addresses;
-
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     private int zipCode;
     private String city;
+    
 
     public CityInfo() {
     }
@@ -34,16 +23,6 @@ public class CityInfo implements Serializable {
     public CityInfo(int zipCode, String city) {
         this.zipCode = zipCode;
         this.city = city;
-    }
-
-    public CityInfo(Integer id, int zipCode, String city) {
-        this.id = id;
-        this.zipCode = zipCode;
-        this.city = city;
-    }
-    
-    public Integer getId() {
-        return id;
     }
 
     public int getZipCode() {
@@ -64,6 +43,8 @@ public class CityInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "cityInfo{" + "id=" + id + ", zipCode=" + zipCode + ", city=" + city + '}';
+        return "CityInfo{" + zipCode + ", city=" + city + '}';
     }
+    
+    
 }

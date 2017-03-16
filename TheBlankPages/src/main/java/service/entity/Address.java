@@ -1,36 +1,29 @@
 package service.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-/**
- *
- * @author Group 4
- */
+
+
 @Entity
 public class Address implements Serializable {
-    
-    @OneToMany(mappedBy = "address")
-    @JoinColumn()
-    private List<InfoEntity> infoEntities;
-    
-    @ManyToOne
-    @JoinColumn()
-    private CityInfo cityInfo;
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String street;
-    private String additionalInfo;
+    
+    private String street, additionalInfo;
+    
+        
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private CityInfo cityInfo;
+    
 
     public Address() {
     }
@@ -40,15 +33,14 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    public Address(Integer id, String street, String additionalInfo) {
-        this.id = id;
-        this.street = street;
-        this.additionalInfo = additionalInfo;
+    public CityInfo getCityInfo() {
+        return cityInfo;
     }
-    
-    public Integer getId() {
-        return id;
+
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
     }
+
 
     public String getStreet() {
         return street;
@@ -66,8 +58,14 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    @Override
-    public String toString() {
-        return "Address{" + "id=" + id + ", street=" + street + ", additionalInfo=" + additionalInfo + '}';
+    
+    public Integer getId() {
+        return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    
 }

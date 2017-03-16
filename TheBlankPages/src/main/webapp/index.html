@@ -6,6 +6,21 @@
     </head>
     <body>
         <h1>Hello Blanko!</h1>
+        <div>
+            <form id="formAddPerson" action="JavaScript:createPerson()" method="POST">
+                <p><b>Add new person</b></p>
+                <input type="text" id="fname" placeholder="First name">
+                <input type="text" id="lname" placeholder="Last name">
+                <input type="text" id="email" placeholder="E-mail address">
+                <input type="text" id="phone" placeholder="Telephone number">
+                <input type="text" id="phoneDesc" placeholder="Telephone description">
+                <input type="text" id="street" placeholder="Street number and name">
+                <input type="text" id="additionalInfo" placeholder="Additional info, e.g. 'first floor'">
+                <input type="text" id="zipCode" placeholder="Zip code">
+                <input type="text" id="city" placeholder="City">
+                <input type="submit" id="btnAddNewPerson" value="Add new person">
+            </form>
+        </div>
         <div id="output"></div>
         <script src="js.js" type="text/javascript"></script>
     </body>

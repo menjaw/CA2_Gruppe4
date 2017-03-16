@@ -11,7 +11,7 @@ private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static Person getPersonFromJson(String js){
         return GSON.fromJson(js, Person.class);
     }
-
+    
     public static String getJSONFromPerson(Person p) {
         return GSON.toJson(p);
     }

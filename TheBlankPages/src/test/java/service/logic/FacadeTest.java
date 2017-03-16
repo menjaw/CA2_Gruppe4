@@ -1,8 +1,8 @@
 package service.logic;
 
 import java.util.List;
-import org.junit.Test;
-import static org.junit.Assert.*;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
 import service.entity.Company;
 import service.entity.Person;
 

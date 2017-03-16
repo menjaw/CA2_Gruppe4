@@ -1,14 +1,13 @@
 package presentation;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import static com.jayway.restassured.parsing.Parser.JSON;
+//import static com.jayway.restassured.parsing.Parser.JSON;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -23,60 +22,83 @@ import service.logic.Facade;
  */
 @Path("person")
 public class PersonResource {
-    Facade facade = new Facade();
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    Facade facade;
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of PersonResource
-     */
     public PersonResource() {
+        facade = new Facade();
     }
 
+    @GET
+    @Path("/complete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPerson(@PathParam("id") int id) {
+        Person p = facade.getPerson(id);
+        return service.logic.JSONConverter.getJSONFromPerson(p);
+    }
+    
+    @GET
+    @Path("/complete")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPersons() {
+        List<Person> ps = facade.getPersons();
+        return service.logic.JSONConverter.getJSONFromPersons(ps);
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addPerson(String inputtedPerson) {
+        Person personToAdd = service.logic.JSONConverter.getPersonFromJson(inputtedPerson);//convert Person object from JSON to Java
+        Person personAdded = facade.addPerson(personToAdd);
+        return service.logic.JSONConverter.getJSONFromPerson(personAdded);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
+        //String jsonPersons = service.logic.JSONConverter.getJSONFromPerson(p);//convert list to JSON
      * Retrieves representation of an instance of presentation.PersonResource
      *
      * @return an instance of java.lang.String
      */
-    @GET
-    @Path("/all")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getPersons() {
-        List<Person> persons = facade.getPersons();
-        //System.out.println(persons.size());
-        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
-        //System.out.println(jsonPersons[0]);
-       // System.out.println(gson.fromJson(jsonPersons.toString()));
-        //System.out.println(jsonPersons);
-        return jsonPersons;
-       //return ""; 
-    }
-    @GET
-    @Path("/byid/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
+//    @GET
+//    @Path("/all")
 //    @Produces(MediaType.APPLICATION_JSON)
-    public String getPersons(@PathParam("id") int id) {
-        Person p = facade.getPerson(id);
-        //String jsonPersons = service.logic.JSONConverter.getJSONFromPerson(p);//convert list to JSON
-        //String s = gson.toJson(p);
-        return p.toString();
-       //return ""; 
-    }
+//    public String getPersons() {
+//        List<Person> persons = facade.getPersons();
+//        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
+//        return jsonPersons;
+//    }
     
-    @GET
-    @Path("/{firstname}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getPersons(@PathParam("firstname") String firstname) {
-        List<Person> persons = facade.getPersons(firstname);
-        //System.out.println(persons.size());
-        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
-        //System.out.println(jsonPersons[0]);
-       // System.out.println(gson.fromJson(jsonPersons.toString()));
-        //System.out.println(jsonPersons);
-        return jsonPersons;
-       //return ""; 
-    }
+    
+    
+//    @GET
+//    @Path("/{firstname}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getPersons(@PathParam("firstname") String firstname) {
+//        List<Person> persons = facade.getPersons(firstname);
+//        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
+//        return jsonPersons;
+//    }
 
     
     
@@ -89,8 +111,8 @@ public class PersonResource {
      *
      * @param content representation for the resource
      */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public void putJson(String content) {
+//    }
 }

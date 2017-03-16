@@ -26,9 +26,9 @@ public class DataGenerator {
         int count = 0;
         nameOfTable = "cityinfo";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
-            CityInfo dataElement = new CityInfo(count+1,count+1, "city"+(count+1));
+            CityInfo dataElement = new CityInfo(count+1, "city"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (id, zipcode, city) values ("+dataElement.getId()+", "+dataElement.getZipCode()+", \""+dataElement.getCity()+"\");";
+            String result = "insert into "+nameOfTable+" (zipcode, city) values ("+dataElement.getZipCode()+", \""+dataElement.getCity()+"\");";
             data.writeToFile(result);
             count++;
         }
@@ -60,9 +60,9 @@ public class DataGenerator {
         int count = 0;
         nameOfTable = "address";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
-            Address dataElement = new Address(count+1, "street"+(count+1), "additionalInfo"+(count+1));
+            Address dataElement = new Address("street"+(count+1), "additionalInfo"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (id, street, additionalInfo, cityinfo_id) values ("+dataElement.getId()+", \""+dataElement.getStreet()+"\", \""+dataElement.getAdditionalInfo()+"\", "+(count+1)+");";
+            String result = "insert into "+nameOfTable+" (street, additionalInfo, cityinfo_id) values (\""+dataElement.getStreet()+"\", \""+dataElement.getAdditionalInfo()+"\", "+(count+1)+");";
             data.writeToFile(result);
             count++;
         }
@@ -96,7 +96,8 @@ public class DataGenerator {
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Person dataElement = new Person("fn"+(count+1),"ln"+(count+1),"em"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (firstname, lastname) values (\""+dataElement.getFirstname()+"\", \""+dataElement.getLastname()+"\");";
+//            String result = "insert into "+nameOfTable+" (firstname, lastname) values (\""+dataElement.getFirstName()+"\", \""+dataElement.getLastName()+"\");";
+            String result = "insert into "+nameOfTable+" (id, firstname, lastname) values ("+(count+1)+", \""+dataElement.getFirstName()+"\", \""+dataElement.getLastName()+"\");";
             data.writeToFile(result);
             count++;
         }
@@ -110,7 +111,7 @@ public class DataGenerator {
         int count = 0;
         nameOfTable = "person_hobby";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
-            String result = "insert into "+nameOfTable+" (hobbies_id, persons_id) values ("+(count+1)+", "+(count+1)+");";
+            String result = "insert into "+nameOfTable+" (hobbies_id, person_id) values ("+(count+1)+", "+(count+1)+");";
             data.writeToFile(result);
             count++;
         }
@@ -124,7 +125,7 @@ public class DataGenerator {
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Phone dataElement = new Phone(count+1,"phoneDescription"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (id, phone, description, infoentity_id) values ("+(count+1)+", "+dataElement.getPhone()+", \""+dataElement.getDescription()+"\", "+(count+1)+");";
+            String result = "insert into "+nameOfTable+" (id, number, description, ie_id) values ("+(count+1)+", "+dataElement.getNumber()+", \""+dataElement.getDescription()+"\", "+(count+1)+");";
             data.writeToFile(result);
             count++;
         }
