@@ -1,6 +1,7 @@
 package presentation;
 
 //import static com.jayway.restassured.parsing.Parser.JSON;
+import exception.PersonNotFoundException;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -36,8 +37,11 @@ public class PersonResource {
     @GET
     @Path("/complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPerson(@PathParam("id") int id) {
+    public String getPerson(@PathParam("id") int id) throws PersonNotFoundException {
         Person p = facade.getPerson(id);
+        if(p==null){
+            throw new PersonNotFoundException("{\"code\": 404, \"message\": \"Person with requested id not found\"}");
+        }
         return jsonconverter.getJSONFromPerson(p);
     }
     
