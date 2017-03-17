@@ -35,16 +35,8 @@ and open the template in the editor.
                 <h1 class="centerText">REST API Documentation</h1>
                 <hr>
 
-                <h2>Has to contain:</h2>
-                <ul>
-                    <li>Complete description of the REST API</li>
-                    <li>Error Responses</li>
-                    <li>JSON format</li>
-                </ul>
-            </div>
-
-            <h3>The REST API</h3>
-            <div>
+                <p>Shows an example for add person</p>
+                <p><img src="Images/AddPersonDiagram.png" alt="rest" width="700"/></p>
                 <table class="table table-striped col-md-8">
                     <thead>
                     <th>Proces</th>
@@ -56,9 +48,9 @@ and open the template in the editor.
                             <td>Title</td>
                             <td>
                                 <ul>
-                                    <li>Name of API call</li>
-                                    <li>Note: try to use verbs that match both request type (fetching vs modifying) and plurality (one vs multiple.)</li>
-                                    <li>Note: Also add additional info here such as a description, if need be.</li>
+                                    <li>addPerson()</li>
+                                    <li>Fetch a single person</li>
+                                    <li>This API call will create one person</li>
                                 </ul>
                             </td>
                         </tr>
@@ -66,9 +58,7 @@ and open the template in the editor.
                             <td>URL</td>
                             <td>
                                 <ul>
-                                    <li>The URL structure (path only, no root url)</li>
-                                    <li>For fixed urls: /users or /photos</li>
-                                    <li>For urls with parameters in them: /users/:id or /photos/:photo_id or /users?id=:id</li>
+                                    <li>http://localhost:8084/TheBlankPages/api/person</li>
                                 </ul>
                             </td>
                         </tr>
@@ -76,49 +66,42 @@ and open the template in the editor.
                             <td>Method</td>
                             <td>
                                 <ul>
-                                    <li>The request type</li>
-                                    <li>GET | POST | DELETE | PUT</li>
+                                    <li>@POST</li>
                                 </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td>URL Parameters</td>
-                            <td>
-                                <ul>
-                                    <li>If URL params exist, specify them in accordance with name mentioned in URL section. Separate into optional and required.</li>
-                                    <li>Required: id=[integer], example: id=12 </li>
-                                    <li>Optional photo_id=[alphanumeric] example: photo_id=2345kj3</li>
-                                </ul>
-                            </td>
-                        </tr>
+                            <!--                    <td>URL Parameters</td>
+                                                        <td>
+                                                            <ul>
+                                                                <li>If URL params exist, specify them in accordance with name mentioned in URL section. Separate into optional and required.</li>
+                                                                <li>Required: id=[integer], example: id=12 </li>
+                                                                <li>Optional photo_id=[alphanumeric] example: photo_id=2345kj3</li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                            -->
                         <tr>
                             <td>Data Parameters</td>
                             <td>
                                 <ul>
-                                    <li>If making a post request, what should the body payload look like? This is a good time to document your various data constraints too.</li>
                                     <li>
-                                        <p>Example:</p>
-                                        <p>{</p>
-                                        <p>u : {</p>
-                                        <p>email : [string],</p>
-                                        <p>name : [string],</p>
-                                        <p>current_password : [alphanumeric]</p>
-                                        <p>password : [alphanumeric],</p>
-                                        <p>password_confirmation : [alphanumeric]</p>
-                                        <p>}</p>
-                                        <p>}</p>
+                                        <p>body: JSON.stringify({</p>
+                                        <p>firstName: [string],</p>
+                                        <p>lastName: [string],</p>
+                                        <p>email: [string],</p>
+                                        <p>phones: [int],</p>
+                                        <p>address: [String]</p>
+                                        <p>})</p>
                                     </li>
                                     <li>
-                                        <p>Example:</p>
-                                        <p>{</p>
-                                        <p>u : {</p>
-                                        <p>email : "john@smith.com",</p>
-                                        <p>name : "John",</p>
-                                        <p>current_password : "apassw0rd"</p>
-                                        <p>password : "anewpassw0rd",</p>
-                                        <p>password_confirmation : "anewpassw0rd"</p>
-                                        <p>}</p>
-                                        <p>}</p>
+                                        <p>body: JSON.stringify({</p>
+                                        <p>firstName: fname.value,</p>
+                                        <p>lastName: lname.value,</p>
+                                        <p>email: email.value,</p>
+                                        <p>phones: [{number:phone.value,description:phoneDesc.value}],</p>
+                                        <p>address: {street:street.value, additionalInfo:additionalInfo.value, cityInfo:{zipCode: zipCode.value}}</p>
+                                        <p>})</p>
                                     </li>
                                 </ul>
                             </td>
@@ -129,15 +112,14 @@ and open the template in the editor.
                                 <ul>
                                     <li>What should the status code be on success and is there any returned data? This is useful when people need to to know what their callbacks should expect! </li>
                                     <li>
-                                        <p>Example:</p>
                                         <p>Code: 200 </p>
-                                        <p>Content: { id : 12 }</p>
+                                        <p>Return the new created person</p>
                                     </li>
                                 </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td>Error Response</td>
+                            <td>NEED TO DO THIS: Error Response</td>
                             <td>                            
                                 <ul>
                                     <li>Most endpoints will have many ways they can fail. From unauthorized access, to wrongful parameters etc. All of those should be listed here. It might seem repetitive, but it helps prevent assumptions from being made where they shouldn’t be.</li>
@@ -156,19 +138,38 @@ and open the template in the editor.
                             <td>Sample calls</td>
                             <td>
                                 <ul>
-                                    <li>Just a sample call to your endpoint in a runnable format ($.ajax call or a curl request) – this makes life easier and more predictable. </li>
                                     <li>
-                                        <img src="Images/RestApiExampleToDelete.PNG" alt="REST"/>
+                                        <h4>Add person call from javascript-file</h4>
+                                        <p><img src="Images/AddPersonJavascript.png" alt="addJs"/></p>
                                     </li>
+                                    <li>
+                                        <h4>Add person call from REST-API-file</h4>
+                                        <p><img src="Images/AddPersonRestApi.png" alt="addRest"/></p>
+                                    </li>
+                                    <li>
+                                        <h4>Add person call from Facade-file</h4>
+                                        <p><img src="Images/AddPersonFacade.png" alt="addFacade"/></p>
+                                    </li>
+
                                 </ul>
                             </td>
                         </tr>
                         <tr>
                             <td>Notes</td>
-                            <td>Some ekstra comment if needed</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <h4>JSON Converter</h4>
+                                        <p><img src="Images/JSONConverter.PNG" alt=""/></p>
+                                    </li>
+                                </ul>
+
+
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+
             </div>
             <!--FOOTER-->
             <div>
