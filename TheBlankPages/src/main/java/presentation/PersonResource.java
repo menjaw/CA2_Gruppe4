@@ -46,10 +46,24 @@ public class PersonResource {
     }
     
     @GET
+    @Path("/complete/by/firstname/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPerson(@PathParam("name") String name) throws PersonNotFoundException {
+        List<Person> ps = facade.getPersonsByFirstName(name);
+        if(ps.size()<1){
+            throw new PersonNotFoundException("{\"code\": 404, \"message\": \"Person with requested first name not found\"}");
+        }
+        return jsonconverter.getJSONFromPersons(ps);
+    }
+    
+    @GET
     @Path("/complete")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPersons() {
+    public String getPersons() throws PersonNotFoundException {
         List<Person> ps = facade.getPersons();
+        if(ps.size()<1){
+            throw new PersonNotFoundException("{\"code\": 404, \"message\": \"There are no persons in the database\"}");
+        }
         return jsonconverter.getJSONFromPersons(ps);
     }
     
@@ -67,27 +81,10 @@ public class PersonResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String updatePerson(String inputtedPerson) {
-        
         Person personToModify = jsonconverter.getPersonFromJson(inputtedPerson);
         Person personModified = facade.updatePerson(personToModify);
         return jsonconverter.getJSONFromPerson(personModified);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     @DELETE
     @Path("/delete/{id}")
@@ -97,54 +94,4 @@ public class PersonResource {
         Person deletedPerson = facade.deletePerson(id);
         return jsonconverter.getJSONFromPerson(deletedPerson);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-        //String jsonPersons = service.logic.JSONConverter.getJSONFromPerson(p);//convert list to JSON
-     * Retrieves representation of an instance of presentation.PersonResource
-     *
-     * @return an instance of java.lang.String
-     */
-//    @GET
-//    @Path("/all")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getPersons() {
-//        List<Person> persons = facade.getPersons();
-//        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
-//        return jsonPersons;
-//    }
-    
-    
-    
-//    @GET
-//    @Path("/{firstname}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getPersons(@PathParam("firstname") String firstname) {
-//        List<Person> persons = facade.getPersons(firstname);
-//        String jsonPersons = service.logic.JSONConverter.getJSONFromPersons(persons);//convert list to JSON
-//        return jsonPersons;
-//    }
-
-    
-    
-    
-    
-    
-    
-    
 }

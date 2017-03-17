@@ -1,13 +1,20 @@
+var fname = document.getElementById("fname");
+var lname = document.getElementById("lname");
+var email = document.getElementById("email");
+var phone = document.getElementById("phone");
+var phoneDesc = document.getElementById("phoneDesc");
+var street = document.getElementById("street");
+var additionalInfo = document.getElementById("additionalInfo");
+var zipCode = document.getElementById("zipCode");
+var city = document.getElementById("city");
 var idOfRecordToUpdate = 0;
 var idOfRecordToDelete = 0;
-//getPersonCompleteId();
-getPersonComplete();
-//createPerson();
-var btnUpdatePerson = document.getElementById("updatePerson");
 var btnAddPerson = document.getElementById("addPerson");
-
-btnUpdatePerson.addEventListener("click",showFormUpdatePerson);
+var btnFindPerson = document.getElementById("findPerson");
+var btnGetAllPersons = document.getElementById("getAllPersons");
+btnGetAllPersons.addEventListener("click",getPersonComplete);
 btnAddPerson.addEventListener("click",showFormAddPerson);
+btnFindPerson.addEventListener("click",showFormFindPerson);
 
 function getPersonCompleteId(id){
     var url = "http://localhost:8084/TheBlankPages/api/person/complete/"+id;
@@ -33,14 +40,15 @@ function getPersonComplete(){
             return response.text();
         }).then(function(text){
             var persons = JSON.parse(text);
-            var lon = "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Phone number(s)</th><th>Email</th><th>Options</th>";
+            var lon = "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Address Line 1</th><th>Address Line 2</th><th>Zip Code</th><th>City</th><th>Phone Number(s)</th><th>Email</th><th>Options</th>";
             for (var x in persons) {
-                lon += "<tr><td>"+persons[x].id+"</td><td>"+persons[x].firstName+"</td><td>"+persons[x].lastName+"</td><td>"+getPhones(persons[x].phones)+"</td><td>"+persons[x].email+"</td><td><button id=\"delete#"+persons[x].id+"\" onclick=\"deletePerson(this.id)\">delete</button><button id=\"update#"+persons[x].id+"\" onclick=\"showFormUpdatePerson(this.id)\">update</button></td></tr>";
+                lon += "<tr><td>"+persons[x].id+"</td><td>"+persons[x].firstName+"</td><td>"+persons[x].lastName+"</td><td>"+persons[x].address.street+"</td><td>"+persons[x].address.additionalInfo+"</td><td>"+persons[x].address.cityInfo.zipCode+"</td><td>"+persons[x].address.cityInfo.city+"</td><td>"+getPhones(persons[x].phones)+"</td><td>"+persons[x].email+"</td><td><button id=\"delete#"+persons[x].id+"\" onclick=\"deletePerson(this.id)\">delete</button><button id=\"update#"+persons[x].id+"\" onclick=\"showFormUpdatePerson(this.id)\">update</button></td></tr>";
             }
             document.getElementById("outputTable").innerHTML = lon;
+            document.getElementById("formPerson").reset();
+            document.getElementById("formPerson").style.display='none';
         });
 }
-
 
 function getPhones(phoneNumbers){
     var tempString = "";
@@ -68,21 +76,42 @@ function deletePerson(id){
         });
 }
 
-var fname = document.getElementById("fname");
-var lname = document.getElementById("lname");
-var email = document.getElementById("email");
-var phone = document.getElementById("phone");
-var phoneDesc = document.getElementById("phoneDesc");
-var street = document.getElementById("street");
-var additionalInfo = document.getElementById("additionalInfo");
-var zipCode = document.getElementById("zipCode");
-var city = document.getElementById("city");
-
 function showFormAddPerson(){
     document.getElementById("formPerson").style.display='block';
     document.getElementById("toggle").value = "Add";
     document.getElementById("toggletext").innerHTML  = document.getElementById("toggle").value+" person";
+    document.getElementById("formPerson").reset();
+    document.getElementById("lname").style.display='block';
+    document.getElementById("email").style.display='block';
+    document.getElementById("phone").style.display='block';
+    document.getElementById("phoneDesc").style.display='block';
+    document.getElementById("street").style.display='block';
+    document.getElementById("additionalInfo").style.display='block';
+    document.getElementById("zipCode").style.display='block';
+    document.getElementById("city").style.display='block';
 }
+
+function showFormFindPerson(){
+    document.getElementById("formPerson").style.display='block';
+    document.getElementById("toggle").value = "Find";
+    document.getElementById("toggletext").innerHTML  = document.getElementById("toggle").value+" person";
+    document.getElementById("formPerson").reset();
+//    var formInputFields = document.querySelectorAll("#formPerson input[type=text]");
+//    for (var x in formInputFields){
+//        formInputFields[x].style.visibility="hidden";
+//    }
+//    document.getElementById("fname").style.visibility ="visible";
+//    document.getElementById("fname").style.visibility ="hidden";
+    document.getElementById("lname").style.display='none';
+    document.getElementById("email").style.display='none';
+    document.getElementById("phone").style.display='none';
+    document.getElementById("phoneDesc").style.display='none';
+    document.getElementById("street").style.display='none';
+    document.getElementById("additionalInfo").style.display='none';
+    document.getElementById("zipCode").style.display='none';
+    document.getElementById("city").style.display='none';
+}
+
 
 function showFormUpdatePerson(id){
     document.getElementById("formPerson").style.display='block';
@@ -105,10 +134,19 @@ function showFormUpdatePerson(id){
             document.getElementById("additionalInfo").value = person.address.additionalInfo;
             document.getElementById("zipCode").value = person.address.cityInfo.zipCode;
             document.getElementById("city").value = person.address.cityInfo.city;
+            document.getElementById("fname").style.display='block';
+            document.getElementById("lname").style.display='block';
+            document.getElementById("email").style.display='block';
+            document.getElementById("phone").style.display='block';
+            document.getElementById("phoneDesc").style.display='block';
+            document.getElementById("street").style.display='block';
+            document.getElementById("additionalInfo").style.display='block';
+            document.getElementById("zipCode").style.display='block';
+            document.getElementById("city").style.display='block';
     });
 }
 
-function addOrUpdate() {
+function formAction() {
     var wordToCheck = document.getElementById("toggle").value;
     if(wordToCheck==="Add"){
         addPerson();
@@ -116,6 +154,32 @@ function addOrUpdate() {
     else if(wordToCheck==="Update"){
         updatePerson();
     }
+    else if(wordToCheck==="Find"){
+        findPerson();
+    }
+}
+function findPerson() {
+    var inputtedFirstName = document.getElementById("fname").value;
+    var url = "http://localhost:8084/TheBlankPages/api/person/complete/by/firstname/"+inputtedFirstName;
+    var conf = {method: 'get'};
+    var promise = fetch(url, conf);
+        promise.then(function(response){
+            return response.text();
+        }).then(function(text){
+            var persons = JSON.parse(text);
+            var lon = "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Address Line 1</th><th>Address Line 2</th><th>Zip Code</th><th>City</th><th>Phone Number(s)</th><th>Email</th><th>Options</th>";
+            for (var x in persons) {
+                lon += "<tr><td>"+persons[x].id+"</td><td>"+persons[x].firstName+"</td><td>"+persons[x].lastName+"</td><td>"+persons[x].address.street+"</td><td>"+persons[x].address.additionalInfo+"</td><td>"+persons[x].address.cityInfo.zipCode+"</td><td>"+persons[x].address.cityInfo.city+"</td><td>"+getPhones(persons[x].phones)+"</td><td>"+persons[x].email+"</td><td><button id=\"delete#"+persons[x].id+"\" onclick=\"deletePerson(this.id)\">delete</button><button id=\"update#"+persons[x].id+"\" onclick=\"showFormUpdatePerson(this.id)\">update</button></td></tr>";
+            }
+            document.getElementById("outputTable").innerHTML = lon;
+            document.getElementById("formPerson").reset();
+            //alert(person);
+//    document.getElementsByTagName("input").hide();
+    
+//    var elem = document.getElementById('frmMain').elements;
+//        for(var i = 0; i < elem.length; i++)
+//        {
+    });    
 }
 
 function addPerson(){
@@ -139,13 +203,26 @@ function addPerson(){
         promise.then(function(response){
             return response.text();
         }).then(function(text){
-            document.getElementById("output").innerHTML = text;
+            document.getElementById("formPerson").reset();
+            document.getElementById("formPerson").style.display='none';
+            alert("Person added: "+text);
         });
-//document.getElementById("formPerson").style.display='none';
-//alert("add");
 }  
 
+function updateInputVars(){
+    fname = document.getElementById("fname");
+    lname = document.getElementById("lname");
+    email = document.getElementById("email");
+    phone = document.getElementById("phone");
+    phoneDesc = document.getElementById("phoneDesc");
+    street = document.getElementById("street");
+    additionalInfo = document.getElementById("additionalInfo");
+    zipCode = document.getElementById("zipCode");
+    city = document.getElementById("city");
+}
+
 function updatePerson(id){
+    updateInputVars();
     var url = "http://localhost:8084/TheBlankPages/api/person/update";
     var conf = {
         method: 'post',

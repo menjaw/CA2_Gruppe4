@@ -6,24 +6,32 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-        <h1>Hello Blanko!</h1>
+        <div id="authors" style="display: none;">Menja Holm Wettergren,Hannibal Alexander Skriver,Martin Kirk</div> <div id="class" style="display: none;">A</div> <div id= "group" style="display: none;">4</div>
+        <h1 align="center">The Blank Pages</h1>
+        <div align="center"><img src="img/BlankPagesWeb.jpg" alt="" width="600" height="250"/></div>
+        <br>
         <div>
-            <form id="formPerson" action="JavaScript:addOrUpdate()" method="POST" style="display:none">
+            <div align="center">
+                <button id="addPerson">Add Person</button>
+                <button id="getAllPersons">Get All Persons</button>
+                <button id="findPerson">Find Person</button>
+            </div>
+            <form id="formPerson" action="JavaScript:formAction()" method="POST" style="display:none">
                 <div id="toggletext"><b>Add new person</b></div>
                 <input type="text" id="fname" placeholder="First name">
                 <input type="text" id="lname" placeholder="Last name">
-                <input type="text" id="email" placeholder="E-mail address">
-                <input type="text" id="phone" placeholder="Telephone number">
-                <input type="text" id="phoneDesc" placeholder="Telephone description">
                 <input type="text" id="street" placeholder="Street number and name">
                 <input type="text" id="additionalInfo" placeholder="Additional info, e.g. 'first floor'">
                 <input type="text" id="zipCode" placeholder="Zip code">
                 <input type="text" id="city" placeholder="City">
+                <input type="text" id="phone" placeholder="Telephone number">
+                <input type="text" id="phoneDesc" placeholder="Telephone description">
+                <input type="text" id="email" placeholder="E-mail address">
                 <input type="submit" id="btnAddNewPerson" value="Submit">
                 <input type="hidden" id="toggle" value="">
             </form>
-            <button id="addPerson">Add Person</button>
-            <button id="updatePerson">Update Person</button>
+            <br><br>
+            
         </div>
         <div id="output"></div>
         <table class="table table-striped" id="outputTable"></table>

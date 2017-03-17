@@ -40,64 +40,38 @@ public class Facade implements FacadeInterface {
     }
     
     @Override
+    public List<Person> getPersonsByFirstName(String name) {
+        em = emf.createEntityManager();
+        Query q1 = em.createQuery("SELECT p FROM Person p WHERE p.firstName LIKE :personName");
+        q1.setParameter("personName", name);
+        return q1.getResultList();//return the received data (a list of Person objects)
+    }
+    
+    @Override
     public Person addPerson(Person p) {
         em = emf.createEntityManager();
         persistData(p, em);
-        return p;
+        em = emf.createEntityManager();
+        int lastAddedId = (Integer) em.createQuery("select max(p.id) from Person p").getSingleResult();
+        Person personAdded = em.find(Person.class,lastAddedId);
+        return personAdded;
     }
     
-//    @Override
-//    public Person updatePerson(Person p) {
-//        em = emf.createEntityManager();
-//        TypedQuery<Person> result = em.createNamedQuery("Person.findById", Person.class);
-//        Person personToUpdate = result.setParameter("id", p.getId()).getSingleResult();
-//
-//        //Udfør ændringerne i databasen
-//        em.getTransaction().begin();
-//        //Tag fat i personToUpdate-variablen og set de forskellige værdier
-//        personToUpdate.setFirstName(p.getFirstName());
-//        personToUpdate.setLastName(p.getLastName());
-//        personToUpdate.setPhones(2,1234);
-////                
-////                (p.getPhones().get(0));
-//        em.getTransaction().commit();
-//        em.close();
-//
-//        //Returner den opdateret person
-//        return personToUpdate;
-//    }
-        
     @Override
     public Person updatePerson(Person personWithUpdatedDetails) {
         em = emf.createEntityManager();
         Person personToModify = em.find(Person.class,personWithUpdatedDetails.getId());
         personToModify.setFirstName(personWithUpdatedDetails.getFirstName());
         personToModify.setLastName(personWithUpdatedDetails.getLastName());
+        personToModify.setEmail(personWithUpdatedDetails.getEmail());
+        personToModify.setPhones(personWithUpdatedDetails.getPhones());
+        personToModify.setAddress(personWithUpdatedDetails.getAddress());
         mergeData(personToModify, em);
         em = emf.createEntityManager();
         Person personModified = em.find(Person.class,personToModify.getId());
         return personModified;
-        
-        
-//        TypedQuery<Person> result = em.createNamedQuery("Person.findById", Person.class);
-//        Person personToUpdate = result.setParameter("id", p.getId()).getSingleResult();
-
-        //Udfør ændringerne i databasen
-//        em.getTransaction().begin();
-        //Tag fat i personToUpdate-variablen og set de forskellige værdier
-//        personToUpdate.setFirstName(p.getFirstName());
-//        personToUpdate.setLastName(p.getLastName());
-//        personToUpdate.setPhones(2,1234);
-//                
-//                (p.getPhones().get(0));
-//        em.getTransaction().commit();
-//        em.close();
-
-        //Returner den opdateret person
     }    
         
-    
-    
     @Override
     public Person deletePerson(int id) {
         em = emf.createEntityManager();
@@ -105,10 +79,6 @@ public class Facade implements FacadeInterface {
         deleteData(personToDelete, em);
         return personToDelete;
     }
-    
-    
-    
-    
     
     private boolean persistData(Object o, EntityManager em){
         try{
@@ -154,46 +124,6 @@ public class Facade implements FacadeInterface {
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-   
 
     @Override
     public Company getCompany(int cvr) {

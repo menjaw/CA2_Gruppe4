@@ -11,9 +11,10 @@ import service.entity.Person;
 public interface FacadeInterface {
     Person getPerson(int id);
     List<Person> getPersons();
-    List<Person> getPersons(int zipCode);
-    Company getCompany(int cvr);
+    List<Person> getPersonsByFirstName(String name);
     Person addPerson(Person p);
     Person updatePerson(Person p);
     Person deletePerson(int id);
+    Company getCompany(int cvr);
+    List<Person> getPersons(int zipCode);
 }
