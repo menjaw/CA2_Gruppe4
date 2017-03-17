@@ -9,7 +9,6 @@ public class GenericExceptionMapper implements ExceptionMapper<Exception>{
 
     @Override
     public Response toResponse(Exception exception) {
-//        return Response.status(404).entity(exception.getMessage()).build();
-        return Response.status(500).entity(exception.getMessage()).build();
+        return Response.status(404).entity(exception.getMessage()).build();
     }
 }

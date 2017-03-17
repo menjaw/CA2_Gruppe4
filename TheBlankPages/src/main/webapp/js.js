@@ -9,14 +9,9 @@ var zipCode = document.getElementById("zipCode");
 var city = document.getElementById("city");
 var idOfRecordToUpdate = 0;
 var idOfRecordToDelete = 0;
-//getPersonCompleteId();
-//getPersonComplete();
-//createPerson();
 var btnAddPerson = document.getElementById("addPerson");
 var btnFindPerson = document.getElementById("findPerson");
 var btnGetAllPersons = document.getElementById("getAllPersons");
-
-
 btnGetAllPersons.addEventListener("click",getPersonComplete);
 btnAddPerson.addEventListener("click",showFormAddPerson);
 btnFindPerson.addEventListener("click",showFormFindPerson);
@@ -54,7 +49,6 @@ function getPersonComplete(){
             document.getElementById("formPerson").style.display='none';
         });
 }
-
 
 function getPhones(phoneNumbers){
     var tempString = "";
@@ -237,7 +231,6 @@ function updatePerson(id){
         'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-//            id: idOfRecordToUpdate,
             id: idOfRecordToUpdate,
             firstName: fname.value,
             lastName: lname.value,
