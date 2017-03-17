@@ -46,6 +46,17 @@ public class PersonResource {
     }
     
     @GET
+    @Path("/complete/by/firstname/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPerson(@PathParam("name") String name) throws PersonNotFoundException {
+        List<Person> ps = facade.getPersonsByFirstName(name);
+        if(ps==null){
+            throw new PersonNotFoundException("{\"code\": 404, \"message\": \"Person with requested id not found\"}");
+        }
+        return jsonconverter.getJSONFromPersons(ps);
+    }
+    
+    @GET
     @Path("/complete")
     @Produces(MediaType.APPLICATION_JSON)
     public String getPersons() {
@@ -67,7 +78,6 @@ public class PersonResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String updatePerson(String inputtedPerson) {
-        
         Person personToModify = jsonconverter.getPersonFromJson(inputtedPerson);
         Person personModified = facade.updatePerson(personToModify);
         return jsonconverter.getJSONFromPerson(personModified);

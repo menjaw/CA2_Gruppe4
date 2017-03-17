@@ -33,6 +33,14 @@ public class Facade implements FacadeInterface {
     }
     
     @Override
+    public List<Person> getPersonsByFirstName(String name) {
+        em = emf.createEntityManager();
+        Query q1 = em.createQuery("SELECT p FROM Person p WHERE p.firstName LIKE :personName");
+        q1.setParameter("personName", name);
+        return q1.getResultList();//return the received data (a list of Person objects)
+    }
+    
+    @Override
     public List<Person> getPersons() {
         em = emf.createEntityManager();
         Query q1 = em.createQuery("Select p from Person p");//retrieve data from database and save it in variable
@@ -46,6 +54,34 @@ public class Facade implements FacadeInterface {
         return p;
     }
     
+    @Override
+    public Person updatePerson(Person personWithUpdatedDetails) {
+        em = emf.createEntityManager();
+        Person personToModify = em.find(Person.class,personWithUpdatedDetails.getId());
+        personToModify.setFirstName(personWithUpdatedDetails.getFirstName());
+        personToModify.setLastName(personWithUpdatedDetails.getLastName());
+        
+        personToModify.setEmail(personWithUpdatedDetails.getEmail());
+        personToModify.setPhones(personWithUpdatedDetails.getPhones());
+        personToModify.setAddress(personWithUpdatedDetails.getAddress());
+//        personToModify.setPhones(personWithUpdatedDetails.getPhones());
+//        personToModify.setPhones(personWithUpdatedDetails.getPhones());
+//        personToModify.setPhones(personWithUpdatedDetails.getPhones());
+//        city
+//                zip
+//                street
+//                        addin
+        
+        
+        
+        
+        
+        mergeData(personToModify, em);
+        em = emf.createEntityManager();
+        Person personModified = em.find(Person.class,personToModify.getId());
+        return personModified;
+        
+        
 //    @Override
 //    public Person updatePerson(Person p) {
 //        em = emf.createEntityManager();
@@ -67,16 +103,6 @@ public class Facade implements FacadeInterface {
 //        return personToUpdate;
 //    }
         
-    @Override
-    public Person updatePerson(Person personWithUpdatedDetails) {
-        em = emf.createEntityManager();
-        Person personToModify = em.find(Person.class,personWithUpdatedDetails.getId());
-        personToModify.setFirstName(personWithUpdatedDetails.getFirstName());
-        personToModify.setLastName(personWithUpdatedDetails.getLastName());
-        mergeData(personToModify, em);
-        em = emf.createEntityManager();
-        Person personModified = em.find(Person.class,personToModify.getId());
-        return personModified;
         
         
 //        TypedQuery<Person> result = em.createNamedQuery("Person.findById", Person.class);

@@ -16,4 +16,5 @@ public interface FacadeInterface {
     Person addPerson(Person p);
     Person updatePerson(Person p);
     Person deletePerson(int id);
+    List<Person> getPersonsByFirstName(String name);
 }
