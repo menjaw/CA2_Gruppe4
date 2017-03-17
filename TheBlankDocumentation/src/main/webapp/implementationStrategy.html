@@ -38,20 +38,35 @@ and open the template in the editor.
                 <h1 class="centerText">The Implementation Strategy</h1>
                 <hr>
 
-                <h2>Have to contain</h2>
-                <ul>
-                    <li>Description of strategy chosen to implements inheritance</li>
-                    <li>We have choosen the InheritanceType.JOINED strategy</li>
-                </ul>
-                
-                <ul>    
-                    <li>Description of why this strategy was chosen</li>
-                </ul>
+
+
+                <h2>Inheritance Strategy</h2>
+                <p><b>We have choosen the InheritanceType.JOINED strategy </b></p>
+                <h3>Domain model</h3>
+                <p><img src="Images/DomainModel.PNG" alt="domain" width="500"/></p>
+
+                <h3>Why this Strategy</h3>
+                <p>TODO: Description of why this strategy was chosen</p>
+                <hr>    
+
+                <h2>Automatically generated test data</h2>
+                <p><img src="Images/GenerateData.png" alt="GenerateData" width="400px" style="margin-bottom: 25px;"/></p>
+                <ol>
+                    <li>The Data Generator Class generates random data to all tables</li>
+                    <li>It is also in The generator class the txt-file is created</li>
+                    <br>
+                    <li>The Write File Class method is revoked everytime The Data Generator has produced an element</li>
+                    <li>The method call one element at the time</li>
+                    <br>
+                    <li>When the generator is finish all the INSERT INTO statements is putted in the txt-file</li>
+                    <li>Copy and Paste the data into the SQL-script and run it</li>
+                </ol>
+                <p><img src="Images/GenerateAutoData.png" alt="autodata" width="300"/></p>
             </div>
 
             <!--FOOTER-->
             <div>
-                <footer class="fixedBottom centerText">
+                <footer class="centerText">
                     <p><b>The Blank Pages by Hannibal Skriver, Martin Kirk and Menja Holm Wettergren </b></p>
                 </footer>
             </div>
