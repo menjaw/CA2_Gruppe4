@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Test Strategy</title>
@@ -39,9 +33,24 @@ and open the template in the editor.
 
                 <h2>Test Results for:</h2>
                 <ul>
-                    <li>Plain Unit Test</li>
-                    <li>Testing of Database facades</li>
-                    <li>Test of The REST API</li>
+                    <li>
+                        <h3>Plain Unit Test against facade</h3>
+                        <ol>
+                            <li><p>Test of getPerson(): assertTrue if requestet name is equals to getted name</p></li>
+                            <li><p>Test of getPersons(): assertFalse if list is empty</p></li>
+                            <li><p>Test of getPersonByFirstName(): assertTrue if person firstname is larger than 0</p></li>
+                            <li> <p>Test of addPerson(): assertTrue if added person is equals to the returned firsname</p></li>
+                            <li> <p>Test of updatePerson(): assertTrue if the updated persons new input is equals to the returned firstname</p></li>
+                            <li> <p>Test of deletedPerson(): assertTrue if length of firstname is larger than 0</p></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <h3>Test of The REST API</h3>
+                        <ol>
+                            <p>Error Handling is possible to test in REST-API</p>
+                            <p>For now it is the 3 GET methods that work, we have not yet implemented error handling for POST and DELETE methods</p>
+                        </ol>
+                    </li>
                 </ul>
             </div>
 
