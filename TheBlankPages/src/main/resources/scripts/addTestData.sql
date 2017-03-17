@@ -13,9 +13,9 @@ start transaction;
 
 
 
--- insert into cityinfo (zipcode, city) values (1, "city1");
--- insert into cityinfo (zipcode, city) values (2, "city2");
--- insert into cityinfo (zipcode, city) values (3, "city3");
+insert into cityinfo (zipcode, city) values (1, "city1");
+insert into cityinfo (zipcode, city) values (2, "city2");
+insert into cityinfo (zipcode, city) values (3, "city3");
 insert into hobby (`name`, description) values ("hobbyName1", "hobbyDescription1");
 insert into hobby (`name`, description) values ("hobbyName2", "hobbyDescription2");
 insert into hobby (`name`, description) values ("hobbyName3", "hobbyDescription3");
