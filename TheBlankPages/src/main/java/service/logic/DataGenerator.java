@@ -24,7 +24,7 @@ public class DataGenerator {
         WriteFile data = new WriteFile(fileNameToCreate, true);//initiate filewriter with the given filename and text append boolean values
         List<CityInfo> dataList = new ArrayList(); 
         int count = 0;
-        nameOfTable = "cityinfo";
+        nameOfTable = "CITYINFO";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             CityInfo dataElement = new CityInfo(count+1, "city"+(count+1));
             dataList.add(dataElement);
@@ -41,7 +41,7 @@ public class DataGenerator {
         WriteFile data = new WriteFile(fileNameToCreate, true);//initiate filewriter with the given filename and text append boolean values
         List<Hobby> dataList = new ArrayList(); 
         int count = 0;
-        nameOfTable = "hobby";
+        nameOfTable = "HOBBY";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Hobby dataElement = new Hobby("hobbyName"+(count+1), "hobbyDescription"+(count+1));
             dataList.add(dataElement);
@@ -58,7 +58,7 @@ public class DataGenerator {
         WriteFile data = new WriteFile(fileNameToCreate, true);//initiate filewriter with the given filename and text append boolean values
         List<Address> dataList = new ArrayList(); 
         int count = 0;
-        nameOfTable = "address";
+        nameOfTable = "ADDRESS";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Address dataElement = new Address("street"+(count+1), "additionalInfo"+(count+1));
             dataList.add(dataElement);
@@ -75,7 +75,7 @@ public class DataGenerator {
         WriteFile data = new WriteFile(fileNameToCreate, true);//initiate filewriter with the given filename and text append boolean values
         List<InfoEntity> dataList = new ArrayList(); 
         int count = 0;
-        nameOfTable = "infoentity";
+        nameOfTable = "INFOENTITY";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             InfoEntity dataElement = new InfoEntity((count+1)+"@email.com");
             dataList.add(dataElement);
@@ -92,7 +92,7 @@ public class DataGenerator {
         WriteFile data = new WriteFile(fileNameToCreate, true);//initiate filewriter with the given filename and text append boolean values
         List<Person> dataList = new ArrayList(); 
         int count = 0;
-        nameOfTable = "person";
+        nameOfTable = "PERSON";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Person dataElement = new Person("fn"+(count+1),"ln"+(count+1),"em"+(count+1));
             dataList.add(dataElement);
@@ -109,7 +109,7 @@ public class DataGenerator {
     public void generatePerson_hobby(int noOfRecordsToProduce){
         WriteFile data = new WriteFile(fileNameToCreate, true);//initiate filewriter with the given filename and text append boolean values
         int count = 0;
-        nameOfTable = "person_hobby";
+        nameOfTable = "PERSON_HOBBY";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             String result = "insert into "+nameOfTable+" (hobbies_id, person_id) values ("+(count+1)+", "+(count+1)+");";
             data.writeToFile(result);
@@ -121,7 +121,7 @@ public class DataGenerator {
         WriteFile data = new WriteFile(fileNameToCreate, true);//initiate filewriter with the given filename and text append boolean values
         List<Phone> dataList = new ArrayList(); 
         int count = 0;
-        nameOfTable = "phone";
+        nameOfTable = "PHONE";
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Phone dataElement = new Phone(count+1,"phoneDescription"+(count+1));
             dataList.add(dataElement);
