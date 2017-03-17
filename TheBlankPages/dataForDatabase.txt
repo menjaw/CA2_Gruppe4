@@ -1,19 +1,3 @@
-SET autocommit = 0;
-
-start transaction;
-
-
-
-
-
-
-
-
--- Replace from here
-
-
-
-
 insert into CITYINFO (zipcode, city) values (1, "city1");
 insert into CITYINFO (zipcode, city) values (2, "city2");
 insert into CITYINFO (zipcode, city) values (3, "city3");
@@ -35,15 +19,3 @@ insert into PERSON_HOBBY (hobbies_id, person_id) values (3, 3);
 insert into PHONE (id, number, description, ie_id) values (1, 1, "phoneDescription1", 1);
 insert into PHONE (id, number, description, ie_id) values (2, 2, "phoneDescription2", 2);
 insert into PHONE (id, number, description, ie_id) values (3, 3, "phoneDescription3", 3);
-
-
-
-
-
-
--- Replace to here
-
-
-
-
-commit;

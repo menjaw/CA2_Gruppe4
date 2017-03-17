@@ -62,7 +62,7 @@ public class DataGenerator {
         for (int i = 0; i < noOfRecordsToProduce; i++) {
             Address dataElement = new Address("street"+(count+1), "additionalInfo"+(count+1));
             dataList.add(dataElement);
-            String result = "insert into "+nameOfTable+" (street, additionalInfo, cityinfo_id) values (\""+dataElement.getStreet()+"\", \""+dataElement.getAdditionalInfo()+"\", "+(count+1)+");";
+            String result = "insert into "+nameOfTable+" (street, additionalInfo, CITYINFO_zipcode) values (\""+dataElement.getStreet()+"\", \""+dataElement.getAdditionalInfo()+"\", "+(count+1)+");";
             data.writeToFile(result);
             count++;
         }
