@@ -238,7 +238,7 @@ function updatePerson(id){
         },
         body: JSON.stringify({
 //            id: idOfRecordToUpdate,
-            id: 5,
+            id: idOfRecordToUpdate,
             firstName: fname.value,
             lastName: lname.value,
             email: email.value,
